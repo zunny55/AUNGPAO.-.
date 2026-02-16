@@ -2,49 +2,100 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧧 ซองแดงตรุษจีน</title>
+<title>🧧 อั่งเปา Zenmee 🧧</title>
 
 <style>
 body{
   margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle,#8b0000,#2b0000);
-  font-family:Arial, sans-serif;
+  background:radial-gradient(circle,#a80000,#6b0000);
   overflow:hidden;
+  font-family:"Prompt",sans-serif;
+  text-align:center;
+  color:#7a0000;
+}
+
+/* ===== ซองแดง ===== */
+.envelope{
   position:relative;
+  width:380px;
+  height:250px;
+  margin:120px auto 0;
+  background:linear-gradient(145deg,#d60000,#9b0000);
+  border-radius:18px;
+  cursor:pointer;
+  box-shadow:0 0 50px rgba(255,0,0,0.6);
+  transition:0.6s;
 }
 
-/* ===== เมฆจีน ===== */
-.cloud{
+/* ฝาซอง */
+.flap{
   position:absolute;
-  width:200px;
-  height:60px;
-  background:rgba(255,215,0,0.08);
-  border-radius:50px;
-  filter:blur(8px);
-  animation:cloudMove 20s linear infinite;
-}
-@keyframes cloudMove{
-  from{transform:translateX(-250px);}
-  to{transform:translateX(120vw);}
+  width:100%;
+  height:100%;
+  background:linear-gradient(145deg,#ff1e1e,#b30000);
+  clip-path:polygon(0 0,100% 0,50% 65%);
+  transform-origin:top;
+  transition:1s;
+  border-radius:18px;
 }
 
-/* ===== กลิตเตอร์ ===== */
-.glitter{
+.envelope.open .flap{
+  transform:rotateX(180deg);
+}
+
+/* ปุ่มทอง */
+.gold-btn{
   position:absolute;
-  width:4px;
-  height:4px;
-  background:gold;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+  width:70px;
+  height:70px;
+  background:radial-gradient(circle,#ffd700,#e6b800);
   border-radius:50%;
-  animation:fall linear infinite;
+  box-shadow:0 0 25px gold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  color:#a00000;
+  animation:pulse 1.5s infinite;
 }
-@keyframes fall{
-  from{transform:translateY(-10px);}
-  to{transform:translateY(110vh);}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 10px gold;}
+  50%{box-shadow:0 0 40px gold;}
+  100%{box-shadow:0 0 10px gold;}
+}
+
+/* ===== กระดาษ ===== */
+.paper{
+  position:absolute;
+  bottom:-200px;
+  left:50%;
+  transform:translateX(-50%);
+  width:320px;
+  height:220px;
+  background:#fff7dc;
+  border-radius:18px;
+  padding:20px;
+  transition:1.2s;
+  box-shadow:0 0 25px rgba(255,255,255,0.6);
+  opacity:0;
+}
+
+.envelope.open + .paper{
+  bottom:-60px;
+  opacity:1;
+}
+
+.paper h2{
+  color:#c40000;
+}
+
+.paper p{
+  font-size:18px;
+  margin-top:10px;
 }
 
 /* ===== พลุ ===== */
@@ -54,226 +105,113 @@ body{
   height:6px;
   background:gold;
   border-radius:50%;
-  animation:explode 2s ease-out forwards;
-}
-@keyframes explode{
-  0%{transform:scale(1);opacity:1;}
-  100%{transform:scale(20);opacity:0;}
+  animation:explode 1s ease-out forwards;
 }
 
-/* ===== โคม ===== */
+@keyframes explode{
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(15);opacity:0;}
+}
+
+/* ===== กลีบดอกเหมย ===== */
+.petal{
+  position:absolute;
+  width:10px;
+  height:10px;
+  background:pink;
+  border-radius:50%;
+  opacity:0.8;
+  animation:fall linear infinite;
+}
+
+@keyframes fall{
+  0%{transform:translateY(-10px);}
+  100%{transform:translateY(100vh);}
+}
+
+/* ===== โคมแดง ===== */
 .lantern{
   position:absolute;
   top:20px;
-  font-size:45px;
+  width:50px;
+  height:70px;
+  background:red;
+  border-radius:25px;
+  box-shadow:0 0 20px gold;
   animation:float 3s ease-in-out infinite;
 }
-.l1{ left:8%; }
-.l2{ right:8%; animation-delay:1s; }
+
+.lantern:after{
+  content:"";
+  position:absolute;
+  bottom:-15px;
+  left:50%;
+  width:4px;
+  height:20px;
+  background:gold;
+  transform:translateX(-50%);
+}
+
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(20px);}
-}
-
-/* ===== ซอง ===== */
-.container{
-  position:relative;
-  width:320px;
-  height:230px;
-  perspective:1000px;
-  cursor:pointer;
-  z-index:10;
-  transition:transform 0.2s;
-}
-
-.container.shake{
-  animation:shake 0.3s;
-}
-@keyframes shake{
-  0%{transform:translateX(0);}
-  25%{transform:translateX(-5px);}
-  50%{transform:translateX(5px);}
-  75%{transform:translateX(-5px);}
-  100%{transform:translateX(0);}
-}
-
-.envelope{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:linear-gradient(145deg,#b30000,#8b0000);
-  border-radius:12px;
-  box-shadow:0 0 50px rgba(255,215,0,0.7);
-  overflow:hidden;
-}
-
-.envelope::after{
-  content:"福";
-  position:absolute;
-  font-size:70px;
-  color:gold;
-  opacity:0.15;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-
-/* ตราประทับ */
-.stamp{
-  position:absolute;
-  bottom:20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  background:radial-gradient(circle,#ffd700,#b8860b);
-  box-shadow:0 0 15px gold;
-}
-
-/* ฝา */
-.flap{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:#cc0000;
-  clip-path:polygon(0 0,100% 0,50% 60%);
-  transform-origin:top;
-  transition:transform 1s ease;
-  backface-visibility:hidden;
-}
-
-.front-text{
-  position:absolute;
-  width:100%;
-  text-align:center;
-  top:95px;
-  color:gold;
-  font-weight:bold;
-  text-shadow:0 0 10px gold;
-  z-index:3;
-}
-
-/* จดหมาย */
-.letter{
-  position:absolute;
-  width:280px;
-  height:190px;
-  background:#fff8dc;
-  left:20px;
-  top:20px;
-  border-radius:8px;
-  padding:20px;
-  box-sizing:border-box;
-  transform:translateY(110%);
-  transition:transform 1.2s ease;
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
-  z-index:2;
-}
-
-.open .flap{ transform:rotateX(180deg); }
-.open .letter{ transform:translateY(-70px); }
-
-.flash{
-  position:absolute;
-  width:500px;
-  height:500px;
-  background:radial-gradient(circle,gold,transparent 70%);
-  top:-120px;
-  left:-90px;
-  opacity:0;
-  transition:opacity 0.5s;
-}
-.open .flash{ opacity:0.8; }
-
-.typewriter{
-  font-size:14px;
-  white-space:pre-line;
+  50%{transform:translateY(10px);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- เมฆ -->
-<div class="cloud" style="top:15%; animation-delay:0s;"></div>
-<div class="cloud" style="top:50%; animation-delay:10s;"></div>
-
 <!-- โคม -->
-<div class="lantern l1">🏮</div>
-<div class="lantern l2">🏮</div>
+<div class="lantern" style="left:15%;"></div>
+<div class="lantern" style="right:15%;"></div>
 
-<div class="container" onclick="openEnvelope(this)">
-  <div class="envelope">
-    <div class="flap"></div>
-    <div class="front-text">🧧 คลิกเพื่อเปิดซอง ✨</div>
-    <div class="stamp"></div>
-  </div>
-  <div class="letter">
-    <div class="typewriter" id="text"></div>
-  </div>
-  <div class="flash"></div>
+<!-- ซอง -->
+<div class="envelope" onclick="openEnvelope()" id="env">
+  <div class="flap"></div>
+  <div class="gold-btn">福</div>
 </div>
 
-<audio id="bgm" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0c6ff1b9e.mp3?filename=chinese-new-year-112193.mp3" type="audio/mpeg">
-</audio>
+<!-- กระดาษ -->
+<div class="paper">
+  <h2>🧧 ถึง Zenmee 🧧</h2>
+  <p>ซินเจียยู่อี่ ซินนี้ฮวดไช้ ✨</p>
+  <p>ขอให้ปีนี้เป็นปีที่สดใส</p>
+  <p>มีแต่โชคลาภ เงินทองไหลมาเทมา 💰</p>
+  <p>สุขภาพแข็งแรง ยิ้มเก่งแบบนี้ตลอดไป</p>
+  <p>และมีคนแอบเอ็นดูเพิ่มขึ้นอีกหนึ่งคน 🤭</p>
+  <p style="margin-top:15px;">🧨 เฮง ๆ ปัง ๆ ตลอดปีเลยนะ 🧨</p>
+</div>
 
-<audio id="openSound">
-  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_c4f0a6f8e4.mp3?filename=whoosh-6316.mp3" type="audio/mpeg">
+<!-- เพลงจีน (เปิดวน) -->
+<audio autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/01/18/audio_0aee3c5b2e.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const message = `ซินเจียยู่อี่ ซินนี้ฮวดไช้ 🧧
-
-ขอให้ปีนี้เฮง ๆ ปัง ๆ
-การงานรุ่งเรือง
-เงินทองไหลมา
-โชคดีตลอดปี ✨`;
-
-function createGlitter(){
-  const g=document.createElement("div");
-  g.className="glitter";
-  g.style.left=Math.random()*100+"vw";
-  g.style.animationDuration=(3+Math.random()*5)+"s";
-  document.body.appendChild(g);
-  setTimeout(()=>g.remove(),8000);
+function openEnvelope(){
+  document.getElementById("env").classList.add("open");
+  launchFireworks();
 }
-setInterval(createGlitter,300);
 
-function createFirework(){
-  const f=document.createElement("div");
-  f.className="firework";
-  f.style.top=Math.random()*70+"vh";
-  f.style.left=Math.random()*100+"vw";
-  document.body.appendChild(f);
-  setTimeout(()=>f.remove(),2000);
+/* พลุ */
+function launchFireworks(){
+  for(let i=0;i<20;i++){
+    let fw=document.createElement("div");
+    fw.className="firework";
+    fw.style.left=Math.random()*100+"%";
+    fw.style.top=Math.random()*50+"%";
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1000);
+  }
 }
-setInterval(createFirework,1500);
 
-function openEnvelope(el){
-  if(el.classList.contains("open")) return;
-  el.classList.add("open");
-  el.classList.add("shake");
-
-  document.getElementById("openSound").play();
-
-  const bgm=document.getElementById("bgm");
-  bgm.volume=0;
-  bgm.play();
-  let v=0;
-  const fade=setInterval(()=>{
-    if(v<0.6){ v+=0.05; bgm.volume=v; }
-    else clearInterval(fade);
-  },200);
-
-  let i=0;
-  const textEl=document.getElementById("text");
-  const typing=setInterval(()=>{
-    textEl.innerHTML+=message[i];
-    i++;
-    if(i>=message.length) clearInterval(typing);
-  },40);
+/* กลีบดอก */
+for(let i=0;i<30;i++){
+  let p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*100+"%";
+  p.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(p);
 }
 </script>
 
