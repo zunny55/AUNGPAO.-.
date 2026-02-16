@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>🧧 อั่งเปาให้ Zenmee</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#b30000,#330000);
+  font-family:Arial;
+  overflow:hidden;
+  color:#fff3b0;
+}
+
+/* จอสั่น */
+@keyframes shakeScreen{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(5px,-5px);}
+  50%{transform:translate(-5px,5px);}
+  75%{transform:translate(5px,5px);}
+  100%{transform:translate(0,0);}
+}
+.shake{
+  animation:shakeScreen 0.4s;
+}
+
+/* โคม */
+.lantern{
+  position:absolute;
+  top:20px;
+  font-size:60px;
+  animation:swing 3s infinite ease-in-out;
+}
+.left{ left:40px;}
+.right{ right:40px;}
+
+@keyframes swing{
+  0%,100%{transform:rotate(0);}
+  50%{transform:rotate(8deg);}
+}
+
+/* ซอง */
+.envelope{
+  width:230px;
+  height:290px;
+  background:linear-gradient(145deg,gold,#d4af37);
+  border-radius:25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:75px;
+  cursor:pointer;
+  box-shadow:0 0 60px gold;
+  animation:pulse 2s infinite;
+  z-index:3;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+}
+
+/* กล่องข้อความ */
+.message-box{
+  display:none;
+  position:absolute;
+  background:#8b0000;
+  padding:60px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 0 60px gold;
+  animation:pop 0.6s ease;
+  z-index:5;
+}
+@keyframes pop{
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+}
+
+/* พลุยิง */
+.rocket{
+  position:absolute;
+  bottom:0;
+  width:4px;
+  height:20px;
+  background:gold;
+  animation:launch 0.8s linear forwards;
+}
+@keyframes launch{
+  to{transform:translateY(-80vh);}
+}
+
+/* พลุแตก */
+.firework{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:gold;
+  border-radius:50%;
+  animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+  from{transform:scale(1);opacity:1;}
+  to{transform:scale(20);opacity:0;}
+}
+
+/* ตัวอักษรทองลอย */
+.goldText{
+  position:absolute;
+  font-size:22px;
+  color:gold;
+  animation:floatUp 4s linear forwards;
+}
+@keyframes floatUp{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-20vh);}
+}
+
+/* มังกร */
+.dragon{
+  position:absolute;
+  bottom:10%;
+  font-size:80px;
+  animation:dragonMove 12s linear infinite;
+}
+@keyframes dragonMove{
+  from{left:-20%;}
+  to{left:120%;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="lantern left">🏮</div>
+<div class="lantern right">🏮</div>
+
+<div class="envelope" onclick="openAngpao()">
+  🧧
+</div>
+
+<div class="message-box" id="messageBox">
+  <h2>🧧 สำหรับ Zenmee</h2>
+  <h3>ซินเจียยู่อี่ ซินนี้ฮวดไช้ 🏮</h3>
+  <p>
+    ขอให้ปีนี้เฮง ๆ ปัง ๆ ✨<br>
+    สุขภาพแข็งแรง ร่ำรวยตลอดปี 💰<br>
+    มีรอยยิ้มทุกวันเลยนะ 🎉
+  </p>
+</div>
+
+<div class="dragon">🐉</div>
+
+<audio id="drum" src="https://assets.mixkit.co/sfx/preview/mixkit-chinese-drum-hit-585.mp3"></audio>
+
+<script>
+function openAngpao(){
+  document.querySelector(".envelope").style.display="none";
+  document.getElementById("messageBox").style.display="block";
+
+  document.body.classList.add("shake");
+  setTimeout(()=>document.body.classList.remove("shake"),400);
+
+  document.getElementById("drum").play();
+
+  // ยิงพลุขึ้น
+  for(let i=0;i<6;i++){
+    let rocket=document.createElement("div");
+    rocket.className="rocket";
+    rocket.style.left=Math.random()*100+"vw";
+    document.body.appendChild(rocket);
+
+    setTimeout(()=>{
+      let fw=document.createElement("div");
+      fw.className="firework";
+      fw.style.left=rocket.style.left;
+      fw.style.top="20vh";
+      document.body.appendChild(fw);
+      rocket.remove();
+      setTimeout(()=>fw.remove(),1000);
+    },800);
+  }
+
+  // ตัวอักษรทองลอย
+  for(let i=0;i<8;i++){
+    let txt=document.createElement("div");
+    txt.className="goldText";
+    txt.innerHTML="福";
+    txt.style.left=Math.random()*100+"vw";
+    document.body.appendChild(txt);
+    setTimeout(()=>txt.remove(),4000);
+  }
+}
+</script>
+
+</body>
+</html>
