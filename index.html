@@ -2,7 +2,8 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<title>🧧 อั่งเปาให้ Zenmee</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧧 ซองแดงตรุษจีน</title>
 
 <style>
 body{
@@ -11,191 +12,271 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle,#b30000,#330000);
-  font-family:Arial;
+  background:radial-gradient(circle,#8b0000,#2b0000);
+  font-family:Arial, sans-serif;
   overflow:hidden;
-  color:#fff3b0;
+  position:relative;
 }
 
-/* จอสั่น */
-@keyframes shakeScreen{
-  0%{transform:translate(0,0);}
-  25%{transform:translate(5px,-5px);}
-  50%{transform:translate(-5px,5px);}
-  75%{transform:translate(5px,5px);}
-  100%{transform:translate(0,0);}
-}
-.shake{
-  animation:shakeScreen 0.4s;
-}
-
-/* โคม */
-.lantern{
+/* ===== เมฆจีน ===== */
+.cloud{
   position:absolute;
-  top:20px;
-  font-size:60px;
-  animation:swing 3s infinite ease-in-out;
+  width:200px;
+  height:60px;
+  background:rgba(255,215,0,0.08);
+  border-radius:50px;
+  filter:blur(8px);
+  animation:cloudMove 20s linear infinite;
 }
-.left{ left:40px;}
-.right{ right:40px;}
-
-@keyframes swing{
-  0%,100%{transform:rotate(0);}
-  50%{transform:rotate(8deg);}
-}
-
-/* ซอง */
-.envelope{
-  width:230px;
-  height:290px;
-  background:linear-gradient(145deg,gold,#d4af37);
-  border-radius:25px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:75px;
-  cursor:pointer;
-  box-shadow:0 0 60px gold;
-  animation:pulse 2s infinite;
-  z-index:3;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
+@keyframes cloudMove{
+  from{transform:translateX(-250px);}
+  to{transform:translateX(120vw);}
 }
 
-/* กล่องข้อความ */
-.message-box{
-  display:none;
+/* ===== กลิตเตอร์ ===== */
+.glitter{
   position:absolute;
-  background:#8b0000;
-  padding:60px;
-  border-radius:30px;
-  text-align:center;
-  box-shadow:0 0 60px gold;
-  animation:pop 0.6s ease;
-  z-index:5;
-}
-@keyframes pop{
-  from{transform:scale(0);}
-  to{transform:scale(1);}
-}
-
-/* พลุยิง */
-.rocket{
-  position:absolute;
-  bottom:0;
   width:4px;
-  height:20px;
+  height:4px;
   background:gold;
-  animation:launch 0.8s linear forwards;
+  border-radius:50%;
+  animation:fall linear infinite;
 }
-@keyframes launch{
-  to{transform:translateY(-80vh);}
+@keyframes fall{
+  from{transform:translateY(-10px);}
+  to{transform:translateY(110vh);}
 }
 
-/* พลุแตก */
+/* ===== พลุ ===== */
 .firework{
   position:absolute;
   width:6px;
   height:6px;
   background:gold;
   border-radius:50%;
-  animation:explode 1s ease-out forwards;
+  animation:explode 2s ease-out forwards;
 }
 @keyframes explode{
-  from{transform:scale(1);opacity:1;}
-  to{transform:scale(20);opacity:0;}
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(20);opacity:0;}
 }
 
-/* ตัวอักษรทองลอย */
-.goldText{
+/* ===== โคม ===== */
+.lantern{
   position:absolute;
-  font-size:22px;
+  top:20px;
+  font-size:45px;
+  animation:float 3s ease-in-out infinite;
+}
+.l1{ left:8%; }
+.l2{ right:8%; animation-delay:1s; }
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(20px);}
+}
+
+/* ===== ซอง ===== */
+.container{
+  position:relative;
+  width:320px;
+  height:230px;
+  perspective:1000px;
+  cursor:pointer;
+  z-index:10;
+  transition:transform 0.2s;
+}
+
+.container.shake{
+  animation:shake 0.3s;
+}
+@keyframes shake{
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-5px);}
+  50%{transform:translateX(5px);}
+  75%{transform:translateX(-5px);}
+  100%{transform:translateX(0);}
+}
+
+.envelope{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(145deg,#b30000,#8b0000);
+  border-radius:12px;
+  box-shadow:0 0 50px rgba(255,215,0,0.7);
+  overflow:hidden;
+}
+
+.envelope::after{
+  content:"福";
+  position:absolute;
+  font-size:70px;
   color:gold;
-  animation:floatUp 4s linear forwards;
-}
-@keyframes floatUp{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-20vh);}
+  opacity:0.15;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
-/* มังกร */
-.dragon{
+/* ตราประทับ */
+.stamp{
   position:absolute;
-  bottom:10%;
-  font-size:80px;
-  animation:dragonMove 12s linear infinite;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffd700,#b8860b);
+  box-shadow:0 0 15px gold;
 }
-@keyframes dragonMove{
-  from{left:-20%;}
-  to{left:120%;}
+
+/* ฝา */
+.flap{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:#cc0000;
+  clip-path:polygon(0 0,100% 0,50% 60%);
+  transform-origin:top;
+  transition:transform 1s ease;
+  backface-visibility:hidden;
+}
+
+.front-text{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  top:95px;
+  color:gold;
+  font-weight:bold;
+  text-shadow:0 0 10px gold;
+  z-index:3;
+}
+
+/* จดหมาย */
+.letter{
+  position:absolute;
+  width:280px;
+  height:190px;
+  background:#fff8dc;
+  left:20px;
+  top:20px;
+  border-radius:8px;
+  padding:20px;
+  box-sizing:border-box;
+  transform:translateY(110%);
+  transition:transform 1.2s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  z-index:2;
+}
+
+.open .flap{ transform:rotateX(180deg); }
+.open .letter{ transform:translateY(-70px); }
+
+.flash{
+  position:absolute;
+  width:500px;
+  height:500px;
+  background:radial-gradient(circle,gold,transparent 70%);
+  top:-120px;
+  left:-90px;
+  opacity:0;
+  transition:opacity 0.5s;
+}
+.open .flash{ opacity:0.8; }
+
+.typewriter{
+  font-size:14px;
+  white-space:pre-line;
 }
 </style>
 </head>
 
 <body>
 
-<div class="lantern left">🏮</div>
-<div class="lantern right">🏮</div>
+<!-- เมฆ -->
+<div class="cloud" style="top:15%; animation-delay:0s;"></div>
+<div class="cloud" style="top:50%; animation-delay:10s;"></div>
 
-<div class="envelope" onclick="openAngpao()">
-  🧧
+<!-- โคม -->
+<div class="lantern l1">🏮</div>
+<div class="lantern l2">🏮</div>
+
+<div class="container" onclick="openEnvelope(this)">
+  <div class="envelope">
+    <div class="flap"></div>
+    <div class="front-text">🧧 คลิกเพื่อเปิดซอง ✨</div>
+    <div class="stamp"></div>
+  </div>
+  <div class="letter">
+    <div class="typewriter" id="text"></div>
+  </div>
+  <div class="flash"></div>
 </div>
 
-<div class="message-box" id="messageBox">
-  <h2>🧧 สำหรับ Zenmee</h2>
-  <h3>ซินเจียยู่อี่ ซินนี้ฮวดไช้ 🏮</h3>
-  <p>
-    ขอให้ปีนี้เฮง ๆ ปัง ๆ ✨<br>
-    สุขภาพแข็งแรง ร่ำรวยตลอดปี 💰<br>
-    มีรอยยิ้มทุกวันเลยนะ 🎉
-  </p>
-</div>
+<audio id="bgm" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0c6ff1b9e.mp3?filename=chinese-new-year-112193.mp3" type="audio/mpeg">
+</audio>
 
-<div class="dragon">🐉</div>
-
-<audio id="drum" src="https://assets.mixkit.co/sfx/preview/mixkit-chinese-drum-hit-585.mp3"></audio>
+<audio id="openSound">
+  <source src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_c4f0a6f8e4.mp3?filename=whoosh-6316.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-function openAngpao(){
-  document.querySelector(".envelope").style.display="none";
-  document.getElementById("messageBox").style.display="block";
+const message = `ซินเจียยู่อี่ ซินนี้ฮวดไช้ 🧧
 
-  document.body.classList.add("shake");
-  setTimeout(()=>document.body.classList.remove("shake"),400);
+ขอให้ปีนี้เฮง ๆ ปัง ๆ
+การงานรุ่งเรือง
+เงินทองไหลมา
+โชคดีตลอดปี ✨`;
 
-  document.getElementById("drum").play();
+function createGlitter(){
+  const g=document.createElement("div");
+  g.className="glitter";
+  g.style.left=Math.random()*100+"vw";
+  g.style.animationDuration=(3+Math.random()*5)+"s";
+  document.body.appendChild(g);
+  setTimeout(()=>g.remove(),8000);
+}
+setInterval(createGlitter,300);
 
-  // ยิงพลุขึ้น
-  for(let i=0;i<6;i++){
-    let rocket=document.createElement("div");
-    rocket.className="rocket";
-    rocket.style.left=Math.random()*100+"vw";
-    document.body.appendChild(rocket);
+function createFirework(){
+  const f=document.createElement("div");
+  f.className="firework";
+  f.style.top=Math.random()*70+"vh";
+  f.style.left=Math.random()*100+"vw";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),2000);
+}
+setInterval(createFirework,1500);
 
-    setTimeout(()=>{
-      let fw=document.createElement("div");
-      fw.className="firework";
-      fw.style.left=rocket.style.left;
-      fw.style.top="20vh";
-      document.body.appendChild(fw);
-      rocket.remove();
-      setTimeout(()=>fw.remove(),1000);
-    },800);
-  }
+function openEnvelope(el){
+  if(el.classList.contains("open")) return;
+  el.classList.add("open");
+  el.classList.add("shake");
 
-  // ตัวอักษรทองลอย
-  for(let i=0;i<8;i++){
-    let txt=document.createElement("div");
-    txt.className="goldText";
-    txt.innerHTML="福";
-    txt.style.left=Math.random()*100+"vw";
-    document.body.appendChild(txt);
-    setTimeout(()=>txt.remove(),4000);
-  }
+  document.getElementById("openSound").play();
+
+  const bgm=document.getElementById("bgm");
+  bgm.volume=0;
+  bgm.play();
+  let v=0;
+  const fade=setInterval(()=>{
+    if(v<0.6){ v+=0.05; bgm.volume=v; }
+    else clearInterval(fade);
+  },200);
+
+  let i=0;
+  const textEl=document.getElementById("text");
+  const typing=setInterval(()=>{
+    textEl.innerHTML+=message[i];
+    i++;
+    if(i>=message.length) clearInterval(typing);
+  },40);
 }
 </script>
 
 </body>
 </html>
+
